@@ -12,6 +12,8 @@ const RestaurantPage = () => {
     return <div className="container">Restaurant not found</div>;
   }
 
+  const getImgUrl = (path) => path ? (path.startsWith('/') ? \`/eatmalawi\${path}\` : \`/eatmalawi/featured/\${path}\`) : '/eatmalawi/featured/placeholder.jpg';
+
   return (
     <div className="container">
       <button
@@ -40,8 +42,8 @@ const RestaurantPage = () => {
         }}
       >
         <img
-          src={restaurant.images[0]}
-          alt={`${restaurant.name} - main view`}
+          src={getImgUrl(restaurant.images[0])}
+          alt={\`\${restaurant.name} - main view\`}
           style={{
             width: "100%",
             height: 400,
@@ -54,8 +56,8 @@ const RestaurantPage = () => {
           {restaurant.images.slice(1, 3).map((img, i) => (
             <img
               key={i}
-              src={img}
-              alt={`${restaurant.name} - photo ${i + 2}`}
+              src={getImgUrl(img)}
+              alt={\`\${restaurant.name} - photo \${i + 2}\`}
               style={{
                 width: "100%",
                 height: 190,
@@ -95,7 +97,7 @@ const RestaurantPage = () => {
               }}
             >
               <img
-                src={item.image}
+                src={getImgUrl(item.image)}
                 alt={item.name}
                 loading="lazy"
                 width="80"
@@ -156,7 +158,7 @@ const RestaurantPage = () => {
         </div>
 
         <a
-          href={`https://wa.me/${restaurant.bookingPhone.replace("+", "")}`}
+          href={\`https://wa.me/\${restaurant.bookingPhone.replace("+", "")}\`}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary"
@@ -177,10 +179,10 @@ const RestaurantPage = () => {
           }}
         >
           <iframe
-            title={`Map showing the location of ${restaurant.name}`}
-            src={`https://www.google.com/maps?q=${encodeURIComponent(
+            title={\`Map showing the location of \${restaurant.name}\`}
+            src={\`https://www.google.com/maps?q=\${encodeURIComponent(
               restaurant.location + ", Malawi"
-            )}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+            )}&t=&z=15&ie=UTF8&iwloc=&output=embed\`}
             width="100%"
             height="100%"
             style={{ border: 0 }}
