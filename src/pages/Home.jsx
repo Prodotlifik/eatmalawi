@@ -63,7 +63,7 @@ const Home = () => {
 
   const shareRestaurant = async (e, restaurant) => {
     e.stopPropagation();
-    const baseUrl = "https://lawi.netlify.app";
+    const baseUrl = "https://prodotlifik.github.io/eatmalawi";
     const shareData = {
       title: restaurant.name,
       text: `Check out ${restaurant.name} in ${restaurant.city}!`,
