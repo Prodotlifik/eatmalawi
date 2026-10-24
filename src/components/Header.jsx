@@ -1,3 +1,5 @@
+import { getAssetUrl } from "../utils/assets.js";
+
 const Header = () => {
   return (
     <header
@@ -11,7 +13,7 @@ const Header = () => {
       }}
     >
       <img
-        src="/Logo.png"
+        src={getAssetUrl("/Logo.png")}
         alt="EatMalawi"
         style={{ height: 40, width: "auto", display: "block" }}
       />
