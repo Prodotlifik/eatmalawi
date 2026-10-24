@@ -2,16 +2,53 @@ import { useParams, useNavigate } from "react-router-dom";
 import { formatPrice } from "../data/restaurants.js";
 import restaurantsData from "../data/restaurants.js";
 import { getAssetUrl } from "../utils/assets.js";
+import { Heart, Share2 } from "lucide-react";
 
 const RestaurantPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [bookmarked, setBookmarked] = React.useState(false);
 
   const restaurant = restaurantsData.find(r => r.id === parseInt(id));
+
+  useEffect(() => {
+    const bookmarks = JSON.parse(localStorage.getItem("eatmalawi_bookmarks") || "[]");
+    setBookmarked(bookmarks.includes(restaurant?.id));
+  }, [restaurant]);
 
   if (!restaurant) {
     return <div className="container">Restaurant not found</div>;
   }
+
+  const toggleBookmark = () => {
+    const bookmarks = JSON.parse(localStorage.getItem("eatmalawi_bookmarks") || "[]");
+    const newBookmarks = bookmarked
+      ? bookmarks.filter(bid => bid !== restaurant.id)
+      : [...bookmarks, restaurant.id];
+
+    setBookmarked(!bookmarked);
+    localStorage.setItem("eatmalawi_bookmarks", JSON.stringify(newBookmarks));
+  };
+
+  const shareRestaurant = async () => {
+    const baseUrl = "https://prodotlifik.github.io/eatmalawi";
+    const shareData = {
+      title: restaurant.name,
+      text: `Check out ${restaurant.name} in ${restaurant.city}!`,
+      url: `${baseUrl}/restaurant/${restaurant.id}`,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        alert("Link copied to clipboard!");
+      }
+    } catch (err) {
+      console.error("Error sharing:", err);
+    }
+  };
 
   return (
     <div className="container">
@@ -37,7 +74,8 @@ const RestaurantPage = () => {
           display: "grid",
           gridTemplateColumns: "2fr 1fr",
           gap: 16,
-          marginBottom: 32
+          marginBottom: 32,
+          position: "relative"
         }}
       >
         <img
@@ -65,6 +103,58 @@ const RestaurantPage = () => {
               }}
             />
           ))}
+        </div>
+
+        <div style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          display: "flex",
+          gap: 8,
+          zIndex: 10
+        }}>
+          <button
+            onClick={shareRestaurant}
+            style={{
+              background: "rgba(255, 255, 255, 0.9)",
+              border: "none",
+              borderRadius: "50%",
+              width: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+              padding: 0
+            }}
+            aria-label="Share"
+          >
+            <Share2 size={18} color="var(--text-main)" />
+          </button>
+          <button
+            onClick={toggleBookmark}
+            style={{
+              background: "rgba(255, 255, 255, 0.9)",
+              border: "none",
+              borderRadius: "50%",
+              width: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+              padding: 0
+            }}
+            aria-label="Bookmark"
+          >
+            <Heart
+              size={18}
+              fill={bookmarked ? "red" : "none"}
+              color={bookmarked ? "red" : "var(--text-main)"}
+            />
+          </button>
         </div>
       </div>
 
