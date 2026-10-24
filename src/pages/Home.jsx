@@ -65,8 +65,8 @@ const Home = () => {
     const baseUrl = "https://lawi.netlify.app";
     const shareData = {
       title: restaurant.name,
-      text: `Check out ${restaurant.name} in ${restaurant.city}!`,
-      url: `${baseUrl}/restaurant/${restaurant.id}`,
+      text: \`Check out \${restaurant.name} in \${restaurant.city}!\`,
+      url: \`\${baseUrl}/restaurant/\${restaurant.id}\`,
     };
 
     try {
@@ -205,7 +205,7 @@ const Home = () => {
             style={{
               background: showFavorites ? "var(--primary)" : "var(--bg-white)",
               color: showFavorites ? "white" : "var(--text-muted)",
-              border: `1px solid ${showFavorites ? "var(--primary)" : "var(--border-color)"}`,
+              border: \`1px solid \${showFavorites ? "var(--primary)" : "var(--border-color)"}\`,
               padding: "6px 16px",
               borderRadius: 999,
               fontSize: 14,
@@ -236,10 +236,10 @@ const Home = () => {
             }}
           >
         {filtered.map((r) => {
-          const imageUrl = r.image ? (r.image.startsWith('/') ? r.image : `/featured/${r.image}`) : '/featured/placeholder.jpg';
-          console.log(`DEBUG: Restaurant: ${r.name}, Image URL: ${imageUrl}`);
+          const imageUrl = r.image ? (r.image.startsWith('/') ? \`/eatmalawi\${r.image}\` : \`/eatmalawi/featured/\${r.image}\`) : '/eatmalawi/featured/placeholder.jpg';
+          console.log(\`DEBUG: Restaurant: \${r.name}, Image URL: \${imageUrl}\`);
           return (
-            <Card key={r.id} onClick={() => navigate(`/restaurant/${r.id}`)}>
+            <Card key={r.id} onClick={() => navigate(\`/restaurant/\${r.id}\`)}>
               <div style={{ position: "relative" }}>
                 <img
                   src={imageUrl}
@@ -312,7 +312,7 @@ const Home = () => {
                   style={{
                     margin: "8px 0",
                     fontSize: 14,
-                    color: "var(--text-muted)",
+                    color: "var(--text-muted",
                     lineHeight: 1.5
                   }}
                 >
@@ -321,15 +321,15 @@ const Home = () => {
                 <p style={{ color: "var(--primary)", fontSize: 14, fontWeight: 500 }}>
                   📍 {r.location}
                 </p>
-              </CardContent>
-            </Card>
-          );
-        })}
-          </div>
-        )}
-      </div>
-    </main>
-  );
+               </CardContent>
+             </Card>
+           );
+         })}
+           </div>
+         )}
+       </div>
+     </main>
+   );
 };
 
 export default Home;
