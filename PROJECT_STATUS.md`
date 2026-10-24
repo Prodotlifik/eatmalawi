@@ -1,0 +1,53 @@
+# Project Status: eatmalawi
+**Last Updated:** 2026-10-23
+**Current State:** Beta / Migration Phase
+
+## 🚀 Overview
+The project has transitioned from a static React site using a local JSON file to a dynamic application powered by **Supabase**. The UI has been optimized for mobile discovery with a focus on a clean, intuitive search experience.
+
+## 🛠 Technical Architecture
+### Frontend
+- **Framework:** React (Vite)
+- **Routing:** `react-router-dom` (configured for SPA with Netlify `_redirects`).
+- **State Management:** React Hooks (`useState`, `useMemo`, `useEffect`).
+- **Styling:** Inline styles with CSS variables for a consistent brand palette.
+
+### Backend (Supabase)
+- **Table Name:** `restaurants`
+- **Schema:**
+  - `id` (int8, PK)
+  - `name` (text)
+  - `city` (text)
+  - `cuisine` (text)
+  - `location` (text)
+  - `description` (text)
+  - `image` (text)
+  - `booking_phone` (text)
+- **Security:** RLS (Row Level Security) is enabled with a public "Read" policy.
+
+## ✨ Implemented Features
+### 1. Discovery & Search
+- **Unified Search Bar:** A 50/50 split "pill" design.
+  - **Location Filter:** Dynamic dropdown generated from database unique cities.
+  - **Cuisine Filter:** Dynamic dropdown generated from database unique cuisines.
+- **Favorites Filter:** A floating "Show Favorites" chip that filters the list based on local bookmarks.
+
+### 2. Restaurant Cards
+- **Visuals:** Top-right overlay buttons for Share and Bookmark.
+- **Bookmarks:** Implemented via `localStorage` (no login required).
+- **Sharing:** Integrated Web Share API for native mobile sharing (fallback to clipboard copy).
+- **Call to Action:** Updated "View Menu" badge with primary brand coloring.
+
+### 3. Infrastructure
+- **Routing Fix:** Added `public/_redirects` to prevent 404s on direct link access in Netlify.
+- **API Integration:** Centralized Supabase client in `src/supabaseClient.js`.
+
+## 📝 Pending Tasks (For Next Session)
+- [ ] **Image Resolution:** Verify and fix image paths in the Supabase `image` column (ensure they are either absolute URLs or correct public paths).
+- [ ] **Final UI Polish:** Check for any remaining mobile responsiveness issues.
+- [ ] **User Testing:** Verify that all filters and bookmarks work across different browser sessions.
+
+## 🔑 Quick Start for Next Session
+- **Home Page Logic:** Located in `src/pages/Home.jsx`.
+- **Data Source:** Supabase `restaurants` table.
+- **Deployment:** Netlify.
