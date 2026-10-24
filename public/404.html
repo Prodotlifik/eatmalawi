@@ -4,15 +4,23 @@
   <meta charset="utf-8">
   <title>EatMalawi</title>
   <script type="text/javascript">
-    // This script takes the current path and redirects to index.html with a query parameter
+    // This script handles the GitHub Pages 404 redirect for a site in a subfolder
     var path = window.location.pathname;
-    window.location.replace(
-      window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') +
-      path.split('?')[0].split('#')[0] +
-      '?p=' + encodeURIComponent(path) +
-      (window.location.search ? window.location.search.substring(1) : '') +
-      (window.location.hash ? window.location.hash : '')
-    );
+
+    // We only want to redirect if we are actually inside the /eatmalawi/ folder
+    if (path.startsWith('/eatmalawi/')) {
+      window.location.replace(
+        window.location.protocol + '//' + window.location.hostname +
+        (window.location.port ? ':' + window.location.port : '') +
+        '/eatmalawi/index.html' +
+        '?p=' + encodeURIComponent(path) +
+        (window.location.search ? window.location.search.substring(1) : '') +
+        (window.location.hash ? window.location.hash : '')
+      );
+    } else {
+      // If for some reason we aren't in the folder, just go to the home page
+      window.location.replace('/eatmalawi/');
+    }
   </script>
 </head>
 <body>
