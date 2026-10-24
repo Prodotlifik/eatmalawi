@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { formatPrice } from "../data/restaurants.js";
 import restaurantsData from "../data/restaurants.js";
+import { getAssetUrl } from "../utils/assets.js";
 
 const RestaurantPage = () => {
   const { id } = useParams();
@@ -11,8 +12,6 @@ const RestaurantPage = () => {
   if (!restaurant) {
     return <div className="container">Restaurant not found</div>;
   }
-
-  const getImgUrl = (path) => path ? (path.startsWith('/') ? \`/eatmalawi\${path}\` : \`/eatmalawi/featured/\${path}\`) : '/eatmalawi/featured/placeholder.jpg';
 
   return (
     <div className="container">
@@ -42,7 +41,7 @@ const RestaurantPage = () => {
         }}
       >
         <img
-          src={getImgUrl(restaurant.images[0])}
+          src={getAssetUrl(restaurant.images[0])}
           alt={\`\${restaurant.name} - main view\`}
           style={{
             width: "100%",
@@ -56,7 +55,7 @@ const RestaurantPage = () => {
           {restaurant.images.slice(1, 3).map((img, i) => (
             <img
               key={i}
-              src={getImgUrl(img)}
+              src={getAssetUrl(img)}
               alt={\`\${restaurant.name} - photo \${i + 2}\`}
               style={{
                 width: "100%",
@@ -97,7 +96,7 @@ const RestaurantPage = () => {
               }}
             >
               <img
-                src={getImgUrl(item.image)}
+                src={getAssetUrl(item.image)}
                 alt={item.name}
                 loading="lazy"
                 width="80"
