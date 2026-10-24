@@ -42,7 +42,7 @@ const RestaurantPage = () => {
       >
         <img
           src={getAssetUrl(restaurant.images[0])}
-          alt={\`\${restaurant.name} - main view\`}
+          alt={`${restaurant.name} - main view`}
           style={{
             width: "100%",
             height: 400,
@@ -56,7 +56,7 @@ const RestaurantPage = () => {
             <img
               key={i}
               src={getAssetUrl(img)}
-              alt={\`\${restaurant.name} - photo \${i + 2}\`}
+              alt={`${restaurant.name} - photo ${i + 2}`}
               style={{
                 width: "100%",
                 height: 190,
@@ -157,7 +157,7 @@ const RestaurantPage = () => {
         </div>
 
         <a
-          href={\`https://wa.me/\${restaurant.bookingPhone.replace("+", "")}\`}
+          href={`https://wa.me/${restaurant.bookingPhone.replace("+", "")}`}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary"
@@ -178,10 +178,10 @@ const RestaurantPage = () => {
           }}
         >
           <iframe
-            title={\`Map showing the location of \${restaurant.name}\`}
-            src={\`https://www.google.com/maps?q=\${encodeURIComponent(
+            title={`Map showing the location of ${restaurant.name}`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(
               restaurant.location + ", Malawi"
-            )}&t=&z=15&ie=UTF8&iwloc=&output=embed\`}
+            )}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
             width="100%"
             height="100%"
             style={{ border: 0 }}
