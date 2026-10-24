@@ -7,7 +7,7 @@ import RestaurantPage from "./pages/RestaurantPage.jsx";
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/eatmalawi">
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Header />
 
