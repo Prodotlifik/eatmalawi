@@ -64,10 +64,11 @@ const Home = () => {
   const shareRestaurant = async (e, restaurant) => {
     e.stopPropagation();
     const baseUrl = "https://prodotlifik.github.io/eatmalawi";
+    const path = `/restaurant/${restaurant.id}`;
     const shareData = {
       title: restaurant.name,
       text: `Check out ${restaurant.name} in ${restaurant.city}!`,
-      url: `${baseUrl}/restaurant/${restaurant.id}`,
+      url: `${baseUrl}/?p=${encodeURIComponent(path)}`,
     };
 
     try {

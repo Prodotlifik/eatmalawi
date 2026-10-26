@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { formatPrice } from "../data/restaurants.js";
 import restaurantsData from "../data/restaurants.js";
@@ -32,10 +33,11 @@ const RestaurantPage = () => {
 
   const shareRestaurant = async () => {
     const baseUrl = "https://prodotlifik.github.io/eatmalawi";
+    const path = `/restaurant/${restaurant.id}`;
     const shareData = {
       title: restaurant.name,
       text: `Check out ${restaurant.name} in ${restaurant.city}!`,
-      url: `${baseUrl}/restaurant/${restaurant.id}`,
+      url: `${baseUrl}/?p=${encodeURIComponent(path)}`,
     };
 
     try {
