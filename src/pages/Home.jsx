@@ -68,7 +68,7 @@ const Home = () => {
     const shareData = {
       title: restaurant.name,
       text: `Check out ${restaurant.name} in ${restaurant.city}!`,
-      url: `${baseUrl}/?p=${encodeURIComponent(path)}`,
+      url: `${baseUrl}${path}`,
     };
 
     try {
