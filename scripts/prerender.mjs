@@ -25,17 +25,20 @@ const escapeHtml = (value) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
-// Prefer the featured photo, but fall back to the next photo when the
-// featured file is too large for chat-app link previews.
+// Pick the link-preview image: chat crawlers (WhatsApp, Facebook) render
+// WebP unreliably, so only JPG/PNG files are eligible. Prefer the featured
+// photo, and fall back to the next candidate when the file is too large
+// for chat-app link previews.
 function pickPreviewImage(restaurant) {
   const candidates = restaurant.images?.length ? restaurant.images : [restaurant.image];
   for (const image of candidates) {
+    if (/\.webp$/i.test(image)) continue;
     const file = join(publicDir, image.replace(/^\//, ""));
     if (existsSync(file) && statSync(file).size < maxImageBytes) {
       return image;
     }
   }
-  return candidates[0];
+  return candidates.find((image) => !/\.webp$/i.test(image)) ?? candidates[0];
 }
 
 // Replace the content of one meta tag in place. The base index.html already

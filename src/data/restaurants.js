@@ -8,11 +8,11 @@ const restaurantsData = [
     cuisine: "Modern",
     location: "Area 47, Lilongwe",
     description: "Modern dining with a relaxed, upscale feel.",
-    image: "/featured/emerald.jpg",
+    image: "/featured/emerald.webp",
     images: [
-      "/featured/emerald.jpg",
+      "/featured/emerald.webp",
       "/featured/emerald1.jpg",
-      "/featured/emerald2.jpg"
+      "/featured/emerald2.webp"
     ],
     menu: [
       {
@@ -49,9 +49,9 @@ const restaurantsData = [
     cuisine: "Casual",
     location: "Victoria Avenue, Blantyre",
     description: "Casual dining with familiar flavours and generous portions.",
-    image: "/featured/Culinary.jpg",
+    image: "/featured/Culinary.webp",
     images: [
-      "/featured/Culinary.jpg",
+      "/featured/Culinary.webp",
       "/featured/Culinary1.jpg",
       "/featured/Culinary2.jpg"
     ],
